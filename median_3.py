@@ -20,21 +20,18 @@ def quicksort_3(A, p, r):
 def partition_3(A, p, r):
     count, insertion_count = 0, 0
     shift = 0
-    print('a', A)
-    if len(A[p: r]) >= 3:
+    if len(A[p: r+1]) >= 3:
         pivots = [(p, A[p]), (r, A[r]), ((p + r) // 2, A[(p + r) // 2])]
-        insertion_count = insertion_tuple(pivots)
-        for index, value in zip([p, p + r // 2, r], pivots):
+        insertion_count = insertion_tuple(pivots)[1]
+        for index, value in zip([p, (p + r) // 2, r], pivots):
             A[index] = value[1]
-        A[p + r // 2], A[r - 1] = A[r - 1], A[p + r // 2]
+        A[(p + r) // 2], A[r - 1] = A[r - 1], A[(p + r )// 2]
         shift = 1
 
     pivot_index = r - shift
     pivot = A[r - shift]
     i = p - 1 + shift
     j = p + shift
-    print('pivot', pivot)
-    print('A after 5')
     while j != pivot_index:
         count += 1
         if A[j] <= pivot:
@@ -59,7 +56,6 @@ def insertion_tuple(lst):
             lst[j], lst[j - 1] = lst[j - 1], lst[j]
             j -= 1
 
-    return count
+    return lst, count
 
 
-print(quicksort_3([3, 10, 2, 4, 1, 0, 9, -1, 5, 2, 2], 0, 10))

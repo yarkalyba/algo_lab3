@@ -18,7 +18,7 @@ def quicksort_5(A, p, r):
 def partition_5(A, p, r):
     count, insertion_count = 0, 0
     shift = 0
-    print("a before partition", A)
+
     if len(A[p: r]) >= 5:
         pivots = [(p, A[p]),
                   ((3*p+r)//4, A[(3*p+r)//4]),
@@ -27,17 +27,14 @@ def partition_5(A, p, r):
                   (r, A[r])]
 
         insertion_count = insertion_tuple(pivots)
-        for index, value in zip([p, (3*p+r)//4, p+r//2, (p + 3*r)//4, r], pivots):
+        for index, value in zip([p, (3*p+r)//4, (p+r)//2, (p + 3*r)//4, r], pivots):
             A[index] = value[1]
 
-        print(len(A), p, r)
         A[p+1], A[(3*p+r)//4] = A[(3*p+r)//4], A[p+1]
         A[r-1], A[(3*r+p)//4] = A[(3*r+p)//4], A[r-1]
-        print(A[r-2], A)
-        A[p+r//2], A[r-2] = A[r-2], A[p+r//2]
-        print(A[r-2], A)
+        A[(p+r)//2], A[r-2] = A[r-2], A[(p+r)//2]
         shift = 2
-    print('A after 5', A)
+
     pivot_index = r - shift
     pivot = A[pivot_index]
     i = p - 1 + shift
@@ -52,7 +49,6 @@ def partition_5(A, p, r):
 
     A[i+1], A[pivot_index] = A[pivot_index], A[i+1]
     i += 1
-    print('A after partition', A)
     return i, count+insertion_count
 
 
@@ -70,4 +66,4 @@ def insertion_tuple(lst):
 
     return count
 
-print(quicksort_5([3, 10, 2, 4, 1, 0, 9, -1, 5, 2, 2], 0, 10))
+# print(quicksort_5([3, 10, 2, 4, 1, 0, 9, -1, 5, 2, 2], 0, 10))
